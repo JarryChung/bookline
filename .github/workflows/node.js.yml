@@ -25,3 +25,23 @@ jobs:
         run: |
           pnpm zip
           pnpm zip:firefox
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+        with:
+          tag_name: 'v1.0.0'
+          release_name: 'Release v1.0.0'
+          draft: false
+          prerelease: false
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: browser-extensions
+          path: |
+            extensions/*.zip
+            extensions/*.xpi
+            ${{ steps.create_release.outputs.upload_url }}
