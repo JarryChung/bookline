@@ -9,27 +9,38 @@ export const useStatStore = defineStore('stat', () => {
   // { year: { count, readingTime, category: [{ value: '', name: '', children: [{ value: '', name: '' }] }] } }
   const stat = computed(() => {
     const books = bookStore.books;
+
+    const updateCategoryStats = (
+      acc: any,
+      key: number | string,
+      categoryTitle: string,
+      subCategoryTitle: string,
+      readingTime: number,
+    ) => {
+      acc[key].count++;
+      acc[key].readingTime += readingTime;
+
+      acc[key].category[categoryTitle] = acc[key].category[categoryTitle] || {
+        value: 0,
+        children: {},
+      };
+      acc[key].category[categoryTitle].value++;
+
+      acc[key].category[categoryTitle].children[subCategoryTitle] = acc[key].category[categoryTitle]
+        .children[subCategoryTitle] || { value: 0 };
+      acc[key].category[categoryTitle].children[subCategoryTitle].value++;
+    };
+
     const target = books.reduce(
       (acc, book) => {
-        if (!book.finishTime) {
-          return acc;
-        }
+        if (!book.finishTime) return acc;
 
         const { finishTime, readingTime, categoryTitle, subCategoryTitle } = book;
-        acc[0].count++;
-        acc[0].readingTime += readingTime;
-        acc[0].category[categoryTitle] = acc[0].category[categoryTitle] || {
-          value: 0,
-          children: {},
-        };
-        acc[0].category[categoryTitle].value++;
 
-        acc[0].category[categoryTitle].children[subCategoryTitle] = acc[0].category[categoryTitle]
-          .children[subCategoryTitle] || {
-          value: 0,
-        };
-        acc[0].category[categoryTitle].children[subCategoryTitle].value++;
+        // 更新总计
+        updateCategoryStats(acc, 0, categoryTitle, subCategoryTitle, readingTime);
 
+        // 更新按年份的统计
         const year = new Date(finishTime).getFullYear();
         if (!acc[year]) {
           acc[year] = {
@@ -38,41 +49,24 @@ export const useStatStore = defineStore('stat', () => {
             category: {},
           };
         }
-        acc[year].count++;
-        acc[year].readingTime += readingTime;
+        updateCategoryStats(acc, year, categoryTitle, subCategoryTitle, readingTime);
 
-        acc[year].category[categoryTitle] = acc[year].category[categoryTitle] || {
-          value: 0,
-          children: {},
-        };
-        acc[year].category[categoryTitle].value++;
-
-        acc[year].category[categoryTitle].children[subCategoryTitle] = acc[year].category[
-          categoryTitle
-        ].children[subCategoryTitle] || {
-          value: 0,
-        };
-        acc[year].category[categoryTitle].children[subCategoryTitle].value++;
         return acc;
       },
-      { 0: Object.assign({}, defaultStat, { category: {} }) } as any,
+      { 0: { ...defaultStat, category: {} } } as any,
     );
 
     // 将 target 中的所有对象的 category 转为数组
     Object.keys(target).forEach((key) => {
-      const categorys = target[key].category;
-      target[key].category = Object.keys(categorys).map((category) => {
-        return {
-          value: categorys[category].value,
-          name: category,
-          children: Object.keys(categorys[category].children).map((subCategory) => {
-            return {
-              value: target[key].category[category].children[subCategory].value,
-              name: subCategory,
-            };
-          }),
-        };
-      });
+      const categories = target[key].category;
+      target[key].category = Object.keys(categories).map((category) => ({
+        value: categories[category].value,
+        name: category,
+        children: Object.keys(categories[category].children).map((subCategory) => ({
+          value: categories[category].children[subCategory].value,
+          name: subCategory,
+        })),
+      }));
     });
 
     return target;
