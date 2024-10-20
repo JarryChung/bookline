@@ -26,14 +26,19 @@ jobs:
           pnpm zip
           pnpm zip:firefox
 
+      - name: Get package version
+        id: get_version
+        run: echo "VERSION=$(node -p \"require('./package.json').version\")" >> $GITHUB_ENV
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
-          tag_name: 'v1.0.0'
-          release_name: 'Release v1.0.0'
+          tagName: bookline-v${{ env.VERSION }} # 使用环境变量替换 __VERSION__
+          releaseName: 'bookline v${{ env.VERSION }}'
+          releaseBody: 'See the assets to download this version and install.'
           draft: false
           prerelease: false
 
@@ -42,6 +47,5 @@ jobs:
         with:
           name: browser-extensions
           path: |
-            extensions/*.zip
-            extensions/*.xpi
-            ${{ steps.create_release.outputs.upload_url }}
+            .output/*.zip
+             ${{ steps.create_release.outputs.upload_url }}
