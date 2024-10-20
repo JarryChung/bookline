@@ -30,5 +30,6 @@
     "typescript": "^5.6.2",
     "vue-tsc": "^2.1.6",
     "wxt": "^0.19.11"
-  }
+  },
+  "packageManager": "pnpm@9.9.0"
 }
