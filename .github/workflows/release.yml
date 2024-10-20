@@ -36,9 +36,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
-          tagName: bookline-v${{ env.VERSION }} # 使用环境变量替换 __VERSION__
-          releaseName: 'bookline v${{ env.VERSION }}'
-          releaseBody: 'See the assets to download this version and install.'
+          tag_name: bookline-v${{ env.VERSION }} # 使用环境变量替换 __VERSION__
+          release_name: 'bookline v${{ env.VERSION }}'
+          body: 'See the assets to download this version and install.'
           draft: false
           prerelease: false
 
