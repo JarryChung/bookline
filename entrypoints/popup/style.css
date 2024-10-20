@@ -1,0 +1,12 @@
+body {
+  font-family: "LXGW WenKai Lite", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+#app {
+  padding: 24px;
+  box-sizing: border-box;
+  height: 500px;
+  width: 700px;
+}

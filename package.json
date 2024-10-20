@@ -1,0 +1,34 @@
+{
+  "name": "bookline",
+  "description": "微信读书笔记导出、阅读记录与统计",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "vue-tsc --noEmit",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "@vicons/carbon": "^0.12.0",
+    "echarts": "^5.5.1",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "naive-ui": "^2.40.1",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.2.1",
+    "vue": "^3.5.11"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@wxt-dev/module-vue": "^1.0.1",
+    "typescript": "^5.6.2",
+    "vue-tsc": "^2.1.6",
+    "wxt": "^0.19.11"
+  }
+}

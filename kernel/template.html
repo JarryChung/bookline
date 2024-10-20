@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css"
+    />
+    <title>${title} [${author}]</title>
+    <style>
+      body {
+        margin: 0;
+        max-width: 600px;
+        padding: 32px;
+        margin: 0 auto;
+        font-family: 'LXGW WenKai Lite', sans-serif;
+      }
+      .header {
+        display: flex;
+        gap: 16px;
+      }
+      .cover {
+        width: 100px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .title {
+        width: 484px;
+        font-size: 24px;
+        margin-bottom: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .content {
+        margin: 24px 0;
+      }
+      .chapter-title {
+        margin: 16px 0 8px 0;
+        font-size: 20px;
+      }
+      .notes {
+        position: relative;
+        margin-bottom: 8px;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #e9e9e9;
+      }
+      .text {
+        line-height: 1.5;
+        padding-bottom: 2px;
+      }
+      .review {
+        border-top: 1px solid #f3f3f3;
+        line-height: 1.5;
+        color: #666;
+        padding-top: 2px;
+      }
+      .time {
+        position: absolute;
+        right: 16px;
+        bottom: 2px;
+        color: #999;
+        font-size: 12px;
+      }
+      .footer {
+        text-align: right;
+        color: #999;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <img
+        src="https://wfqqreader-1252317822.image.myqcloud.com/cover/905/42985905/s_42985905.jpg"
+        class="cover"
+      />
+      <!-- <img src="${cover}" alt="${title}" class="cover" /> -->
+      <div class="info">
+        <div class="title">${title}</div>
+        <div>
+          <span>[作] ${author}</span>
+          <span>${translator ? '[译] ' + translator : ''}</span>
+        </div>
+        <div>
+          <span>${noteCount} 条划线</span>
+          <span>${reviewCount} 个想法</span>
+        </div>
+        <div>阅读时间 ${formatReadingTime(readingTime)}</div>
+        <div>
+          ${finishTime ? '阅读完成于 ' + formatTime(finishTime) : '阅读进度 ' + progress + '%'}
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="chapter">
+        <div class="chapter-title">${chapterTitle}</div>
+        <div class="notes">
+          <div class="text">${text}</div>
+          <div class="review">${reviewText}</div>
+          <div class="time">${createTime}</div>
+        </div>
+      </div>
+
+      <div class="chapter">
+        <div class="chapter-title">${chapterTitle}</div>
+        <div class="notes">
+          <div class="text">${text}</div>
+          <div class="review">${reviewText}</div>
+          <div class="time">${createTime}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Exported by bookline</div>
+  </body>
+</html>
