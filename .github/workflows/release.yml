@@ -26,6 +26,11 @@ jobs:
         run: |
           pnpm zip
           pnpm zip:firefox
+        # 假设 pnpm zip:firefox 生成两个压缩包：dist/firefox-extension.zip 和 dist/firefox-source.zip
+        outputs:
+          chrome_zip_path: dist/extension.zip
+          firefox_zip_path: dist/firefox-extension.zip
+          firefox_source_zip_path: dist/firefox-source.zip
 
       - name: Get package version
         id: get_version
@@ -43,10 +48,32 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+      - name: Upload Chrome extension to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
-          name: browser-extensions
-          path: |
-            ${{ steps.zip_extensions.outputs.upload_url }}
-            ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.zip_extensions.outputs.chrome_zip_path }}
+          asset_name: chrome-extension-v${{ env.VERSION }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Firefox extension to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.zip_extensions.outputs.firefox_zip_path }}
+          asset_name: firefox-extension-v${{ env.VERSION }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload Firefox source zip to release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.zip_extensions.outputs.firefox_source_zip_path }}
+          asset_name: firefox-source-v${{ env.VERSION }}.zip
+          asset_content_type: application/zip
