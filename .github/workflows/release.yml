@@ -22,6 +22,7 @@ jobs:
         run: pnpm install
 
       - name: Zip extensions
+        id: zip_extensions
         run: |
           pnpm zip
           pnpm zip:firefox
@@ -36,7 +37,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
-          tag_name: bookline-v${{ env.VERSION }} # 使用环境变量替换 __VERSION__
+          tag_name: bookline-v${{ env.VERSION }}
           release_name: 'bookline v${{ env.VERSION }}'
           body: 'See the assets to download this version and install.'
           draft: false
@@ -47,5 +48,5 @@ jobs:
         with:
           name: browser-extensions
           path: |
-            .output/*.zip
-             ${{ steps.create_release.outputs.upload_url }}
+            ${{ steps.zip_extensions.outputs.upload_url }}
+            ${{ steps.create_release.outputs.upload_url }}
