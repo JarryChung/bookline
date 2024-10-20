@@ -21,20 +21,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Zip extensions
-        id: zip_extensions
-        run: |
-          pnpm zip
-          pnpm zip:firefox
-        # 假设 pnpm zip:firefox 生成两个压缩包：dist/firefox-extension.zip 和 dist/firefox-source.zip
-        outputs:
-          chrome_zip_path: dist/extension.zip
-          firefox_zip_path: dist/firefox-extension.zip
-          firefox_source_zip_path: dist/firefox-source.zip
-
       - name: Get package version
         id: get_version
         run: echo VERSION=$(node -p "require('./package.json').version") >> $GITHUB_ENV
+
+      - name: Zip extensions
+        run: |
+          pnpm zip
+          pnpm zip:firefox 
+          echo "CHROME_ZIP_PATH=.output/bookline-${{ env.VERSION }}-chrome.zip" >> $GITHUB_ENV
+          echo "FIREFOX_ZIP_PATH=.output/bookline-${{ env.VERSION }}-firefox.zip" >> $GITHUB_ENV
+          echo "FIREFOX_SOURCE_ZIP_PATH=.output/bookline-${{ env.VERSION }}-sources.zip" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -54,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.zip_extensions.outputs.chrome_zip_path }}
+          asset_path: ${{ env.CHROME_ZIP_PATH }}
           asset_name: chrome-extension-v${{ env.VERSION }}.zip
           asset_content_type: application/zip
 
@@ -64,7 +61,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.zip_extensions.outputs.firefox_zip_path }}
+          asset_path: ${{ env.FIREFOX_ZIP_PATH }}
           asset_name: firefox-extension-v${{ env.VERSION }}.zip
           asset_content_type: application/zip
 
@@ -74,6 +71,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.zip_extensions.outputs.firefox_source_zip_path }}
+          asset_path: ${{ env.FIREFOX_SOURCE_ZIP_PATH }}
           asset_name: firefox-source-v${{ env.VERSION }}.zip
           asset_content_type: application/zip
