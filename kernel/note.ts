@@ -171,7 +171,17 @@ export const useNoteStore = defineStore('note', () => {
     });
   };
 
-  return { download };
+  const fetchNotes = async (bookIds: string[]) => {
+    if (bookIds.length === 0) {
+      return;
+    }
+
+    await batchFetchNote(bookIds);
+    const bookNotes = getBookNotes(bookIds);
+    return bookNotes;
+  };
+
+  return { download, fetchNotes };
 });
 
 export const useSelectionStore = defineStore('selection', () => {

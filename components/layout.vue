@@ -61,7 +61,7 @@ const setActiveTab = (tabKey) => {
   box-sizing: border-box;
 }
 .tabs {
-  width: 200px;
+  width: 220px;
   margin-left: 8px;
   flex-shrink: 0;
 }
