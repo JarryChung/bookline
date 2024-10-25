@@ -1,7 +1,8 @@
 body {
-  font-family: "LXGW WenKai Lite", sans-serif;
+  font-family: 'LXGW WenKai Lite', sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  font-size: 14px;
 }
 
 #app {

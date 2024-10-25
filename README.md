@@ -9,15 +9,17 @@ A browser extension that can be used to export WeRead notes and view reading rec
 
 ## 特性 / Features
 
-- 导出读书笔记（划线与想法），支持 markdown、html、json、text 格式。
-- 展示有笔记的书籍列表，支持列表展示与月历展示。
-- 统计阅读记录。
+- 导出笔记：包括划线与想法，支持 markdown、html、json、text 格式。
+- 每日回顾：随机展示一本书籍的 10 条笔记。
+- 阅历：通过日历形式展示阅读历史。
+- 统计：统计阅读记录。
 
 ---
 
-- Export reading notes (marks and ideas), supporting markdown, html, json, and text.
-- Show a list of books with notes, supporting list and calendar display.
-- Statistics reading records.
+- Export notes: including highlights and thoughts, support markdown, html, json, text formats.
+- Daily review: randomly show 10 notes of a book.
+- Experience: show reading history through calendar.
+- Statistics: statistics reading records.
 
 ## 安装 / Installation
 
