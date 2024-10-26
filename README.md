@@ -23,14 +23,16 @@ A browser extension that can be used to export WeRead notes and view reading rec
 
 ## 安装 / Installation
 
-- Firefox 插件 [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
 - Chrome 插件 [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
+- Edge 插件 [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
+- Firefox 插件 [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
 - 手动安装 [release](https://github.com/JarryChung/bookline/releases)
 
 ---
 
-- Firefox ADD-ON [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
 - Chrome Extension [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
+- Edge Add-on [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
+- Firefox Add-on [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
 - Manual installation [release](https://github.com/JarryChung/bookline/releases)
 
 ## 开发 / Development
