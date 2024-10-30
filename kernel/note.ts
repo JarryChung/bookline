@@ -193,7 +193,7 @@ export const useSelectionStore = defineStore('selection', () => {
   };
 
   const setSelected = (list: string[]) => {
-    selected.value = list;
+    selected.value = [...list];
   };
 
   const updateSelected = (id: string) => {

@@ -1,5 +1,6 @@
 <script setup>
-import { NButton } from 'naive-ui';
+import { NButton, NButtonGroup } from 'naive-ui';
+import { ChevronLeft, ChevronRight, RadioButton } from '@vicons/carbon';
 import { useCalendarStore } from '@/kernel/calendar';
 
 const calendar = useCalendarStore();
@@ -18,9 +19,17 @@ const onToday = () => {
   <div class="history-action">
     <div class="date">{{ calendar.date.year }}年{{ calendar.date.month }}月</div>
     <div class="change">
-      <NButton size="small" secondary strong @click="onPrev">上月</NButton>
-      <NButton size="small" secondary strong @click="onToday">今天</NButton>
-      <NButton size="small" secondary strong @click="onNext">下月</NButton>
+      <NButtonGroup>
+        <NButton size="small" secondary strong @click="onPrev">
+          <template #icon><ChevronLeft /></template>
+        </NButton>
+        <NButton size="small" secondary strong @click="onToday">
+          <template #icon><RadioButton /></template>
+        </NButton>
+        <NButton size="small" secondary strong @click="onNext">
+          <template #icon><ChevronRight /></template>
+        </NButton>
+      </NButtonGroup>
     </div>
   </div>
 </template>

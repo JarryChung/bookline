@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
-import { NButton } from 'naive-ui';
+import { NButton, NButtonGroup } from 'naive-ui';
+import { ChevronLeft, ChevronRight, RadioButton, Apps } from '@vicons/carbon';
 import { useYearStore } from '@/kernel/stat';
 
 const year = useYearStore();
@@ -31,12 +32,22 @@ const onAll = () => {
 
 <template>
   <div class="stat-action">
-    <div class="year">{{ yearText }}</div>
+    <div class="year">{{ yearText }}年</div>
     <div class="change">
-      <NButton size="small" secondary strong @click="onAll">所有</NButton>
-      <NButton size="small" secondary strong @click="onPrev">上年</NButton>
-      <NButton size="small" secondary strong @click="onToday">今年</NButton>
-      <NButton size="small" secondary strong @click="onNext">下年</NButton>
+      <NButton size="small" secondary strong @click="onAll">
+        <template #icon><Apps /></template>
+      </NButton>
+      <NButtonGroup>
+        <NButton size="small" secondary strong @click="onPrev">
+          <template #icon><ChevronLeft /></template>
+        </NButton>
+        <NButton size="small" secondary strong @click="onToday">
+          <template #icon><RadioButton /></template>
+        </NButton>
+        <NButton size="small" secondary strong @click="onNext">
+          <template #icon><ChevronRight /></template>
+        </NButton>
+      </NButtonGroup>
     </div>
   </div>
 </template>

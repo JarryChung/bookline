@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { NButton, NPopover, NBadge } from 'naive-ui';
-import { Download, StackedMove } from '@vicons/carbon';
+import { Download, StackedMove, RadioButton, Recording, RadioButtonChecked } from '@vicons/carbon';
 import { useSelectionStore, useNoteStore } from '@/kernel/note';
 import { useBookStore } from '@/kernel/book';
 
@@ -15,10 +15,23 @@ const deleteAll = () => {
     selection.setSelected([]);
   }
 };
+const toggleSelected = () => {
+  if (selection.selected.length < book.bookIds.length) {
+    setAll();
+  } else {
+    deleteAll();
+  }
+};
 const setIsSelecting = (is) => {
   deleteAll();
   selection.setIsSelecting(is);
 };
+
+const nonSelected = computed(() => selection.selected.length === 0);
+const someSelected = computed(
+  () => selection.selected.length > 0 && selection.selected.length < book.bookIds.length,
+);
+const allSelected = computed(() => selection.selected.length === book.bookIds.length);
 
 const popoverRef = ref(null);
 const closePopover = () => {
@@ -35,17 +48,22 @@ const onDownload = (format) => {
 <template>
   <div class="note-action">
     <div v-if="selection.isSelecting" class="select">
-      <NButton size="small" secondary strong @click="setAll">选择全部</NButton>
-      <NButton size="small" secondary strong @click="deleteAll">移除全部</NButton>
+      <NBadge :value="selection.selected.length" type="success">
+        <NButton size="small" secondary strong @click="toggleSelected">
+          <template #icon>
+            <RadioButton v-if="nonSelected" />
+            <Recording v-if="someSelected" />
+            <RadioButtonChecked v-if="allSelected" />
+          </template>
+        </NButton>
+      </NBadge>
       <NPopover placement="bottom" trigger="click" ref="popoverRef">
         <template #trigger>
-          <NBadge :value="selection.selected.length" type="success">
-            <NButton size="small" secondary strong :disabled="selection.selected.length <= 0">
-              <template #icon>
-                <Download />
-              </template>
-            </NButton>
-          </NBadge>
+          <NButton size="small" secondary strong :disabled="selection.selected.length <= 0">
+            <template #icon>
+              <Download />
+            </template>
+          </NButton>
         </template>
 
         <div class="format">
@@ -78,9 +96,9 @@ const onDownload = (format) => {
       strong
       @click="setIsSelecting(false)"
     >
-      取消
+      取消导出
     </NButton>
-    <NButton v-else size="small" secondary strong @click="setIsSelecting(true)">导出</NButton>
+    <NButton v-else size="small" secondary strong @click="setIsSelecting(true)">导出笔记</NButton>
   </div>
 </template>
 
