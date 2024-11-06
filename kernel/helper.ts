@@ -93,3 +93,16 @@ export const unique = <T, K extends string | number | symbol>(
   }, {} as Record<string | number | symbol, T>);
   return Object.values(valueMap);
 };
+
+export const isOnlyOne = (source: string, target: string) => {
+  const start = source.indexOf(target);
+  const end = source.lastIndexOf(target);
+  return start === end;
+};
+
+export const replaceOne = (str: string, source: string, target: string) => {
+  if (isOnlyOne(str, source)) {
+    return str.replace(source, target);
+  }
+  return str;
+};

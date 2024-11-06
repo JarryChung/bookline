@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { useAsyncResource, createPool } from './helper';
+import { useAsyncResource, createPool, replaceOne } from './helper';
 import { useUserStore } from './user';
 
 export const useAllBookStore = defineStore('all_book', () => {
@@ -55,7 +55,7 @@ export const useBookStore = defineStore('book', () => {
         title,
         author,
         translator,
-        cover,
+        cover: replaceOne(cover, 's_', 't6_'),
         noteCount,
         reviewCount,
         bookmarkCount,

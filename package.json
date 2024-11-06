@@ -2,7 +2,7 @@
   "name": "bookline",
   "description": "WeRead 微信读书笔记导出、回顾、阅读记录与统计",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "wxt",

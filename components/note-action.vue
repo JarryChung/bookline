@@ -57,9 +57,9 @@ const onDownload = (format) => {
           </template>
         </NButton>
       </NBadge>
-      <NPopover placement="bottom" trigger="click" ref="popoverRef">
+      <NPopover placement="bottom" trigger="hover" :disabled="nonSelected" ref="popoverRef">
         <template #trigger>
-          <NButton size="small" secondary strong :disabled="selection.selected.length <= 0">
+          <NButton size="small" secondary strong :disabled="nonSelected">
             <template #icon>
               <Download />
             </template>
@@ -74,9 +74,15 @@ const onDownload = (format) => {
           <NButton size="small" secondary @click="onDownload('text')">Text</NButton>
         </div>
       </NPopover>
-      <NPopover placement="bottom" trigger="click" ref="popoverRef" :width="200">
+      <NPopover
+        placement="bottom"
+        trigger="hover"
+        :width="200"
+        :disabled="nonSelected"
+        ref="popoverRef"
+      >
         <template #trigger>
-          <NButton size="small" secondary strong :disabled="selection.selected.length <= 0">
+          <NButton size="small" secondary strong :disabled="nonSelected">
             <template #icon>
               <StackedMove />
             </template>
