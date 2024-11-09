@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { NCard, NDivider } from 'naive-ui';
+import { NCard, NDivider, NStatistic, NNumberAnimation } from 'naive-ui';
 import { formatReadingTime } from '@/kernel/helper';
 import { useStatStore, useYearStore, defaultStat } from '@/kernel/stat';
 import PieChart from './pie-chart.vue';
@@ -17,9 +17,14 @@ const statData = computed(() => {
   <div>
     <NCard>
       <div class="data">
-        <div>{{ statData.count }}本书籍</div>
+        <NStatistic label="阅读数量" tabular-nums>
+          <NNumberAnimation :from="0" :to="statData.count" />
+          <template #suffix>本书籍</template>
+        </NStatistic>
         <NDivider vertical />
-        <div>{{ formatReadingTime(statData.readingTime) }}</div>
+        <NStatistic label="阅读时长">
+          <div>{{ formatReadingTime(statData.readingTime) }}</div>
+        </NStatistic>
       </div>
     </NCard>
 
@@ -34,7 +39,6 @@ const statData = computed(() => {
   display: flex;
   justify-content: space-around;
   gap: 12px;
-  font-size: 42px;
 }
 .chart {
   display: flex;

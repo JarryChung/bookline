@@ -69,10 +69,15 @@ export function formatTime(time: number): string {
   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
-export function formatReadingTime(time: number): string {
+export function formatReadingTimeToObject(time: number) {
   const hours = Math.floor(time / 60 / 60);
   const minutes = time % 60;
-  return `${hours}h${minutes}m`;
+  return { hours, minutes };
+}
+
+export function formatReadingTime(time: number): string {
+  const { hours, minutes } = formatReadingTimeToObject(time);
+  return `${hours}时${minutes}分`;
 }
 
 /**

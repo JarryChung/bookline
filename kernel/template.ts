@@ -149,6 +149,7 @@ function renderHTML(data: any) {
           border: 1px solid #e9e9e9;
         }
         .text {
+          white-space: pre-wrap;
           line-height: 1.5;
           padding-bottom: 2px;
         }

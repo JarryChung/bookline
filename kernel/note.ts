@@ -154,21 +154,21 @@ export const useNoteStore = defineStore('note', () => {
     });
   };
 
-  const download = (format: string) => {
+  const download = async (format: string) => {
     const bookIds = selection.selected;
     if (bookIds.length === 0) {
       return;
     }
-    batchFetchNote(bookIds).then(() => {
-      const fileContents: { [fileName: string]: string } = {};
-      const suffix = suffixMap[format];
-      const bookNotes = getBookNotes(bookIds);
-      bookNotes.forEach((bookNote) => {
-        const { title } = bookNote;
-        fileContents[`${title}.${suffix}`] = render(bookNote, format);
-      });
-      downloadZIP(fileContents, `bookline_export_${format}_${formatTime(Date.now())}.zip`);
+
+    await batchFetchNote(bookIds);
+    const fileContents: { [fileName: string]: string } = {};
+    const suffix = suffixMap[format];
+    const bookNotes = getBookNotes(bookIds);
+    bookNotes.forEach((bookNote) => {
+      const { title } = bookNote;
+      fileContents[`${title}.${suffix}`] = render(bookNote, format);
     });
+    downloadZIP(fileContents, `bookline_export_${format}_${formatTime(Date.now())}.zip`);
   };
 
   const fetchNotes = async (bookIds: string[]) => {

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { NButton, NPopover, NBadge } from 'naive-ui';
+import { NButton, NPopover, NBadge, useMessage } from 'naive-ui';
 import { Download, StackedMove, RadioButton, Recording, RadioButtonChecked } from '@vicons/carbon';
 import { useSelectionStore, useNoteStore } from '@/kernel/note';
 import { useBookStore } from '@/kernel/book';
@@ -39,8 +39,10 @@ const closePopover = () => {
 };
 
 const note = useNoteStore();
-const onDownload = (format) => {
-  note.download(format);
+const message = useMessage();
+const onDownload = async (format) => {
+  await note.download(format);
+  message.success(`导出成功`, { closable: true });
   closePopover();
 };
 </script>
@@ -74,13 +76,7 @@ const onDownload = (format) => {
           <NButton size="small" secondary @click="onDownload('text')">Text</NButton>
         </div>
       </NPopover>
-      <NPopover
-        placement="bottom"
-        trigger="hover"
-        :width="200"
-        :disabled="nonSelected"
-        ref="popoverRef"
-      >
+      <NPopover placement="bottom" trigger="hover" :width="200" :disabled="nonSelected">
         <template #trigger>
           <NButton size="small" secondary strong :disabled="nonSelected">
             <template #icon>

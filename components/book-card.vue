@@ -1,7 +1,15 @@
 <script setup>
-import { TextAnnotationToggle, Time, ArrowRight, ProgressBarRound, Review } from '@vicons/carbon';
-import { NPopover } from 'naive-ui';
+import {
+  TextAnnotationToggle,
+  Time,
+  ArrowRight,
+  ProgressBarRound,
+  Review,
+  MachineLearningModel,
+} from '@vicons/carbon';
+import { NPopover, NImage } from 'naive-ui';
 import { formatReadingTime, formatTime } from '@/kernel/helper';
+import ReviewWindow from './review-window.vue';
 
 const props = defineProps({
   book: {
@@ -9,10 +17,17 @@ const props = defineProps({
     required: true,
   },
 });
+
+const reviewWindowRef = ref(null);
+function onOpenReviewWindow(bookId, title, cover) {
+  reviewWindowRef.value.open(bookId, title, cover);
+}
 </script>
 
 <template>
   <div class="book-card">
+    <ReviewWindow ref="reviewWindowRef" />
+
     <img :src="book.cover" alt="cover" class="cover" />
 
     <div class="book">
@@ -34,6 +49,9 @@ const props = defineProps({
         <span>
           <Review class="icon" />
           {{ book.reviewCount }}
+        </span>
+        <span @click.stop="onOpenReviewWindow(book.bookId, book.title, book.cover)">
+          <MachineLearningModel class="icon open-review-window" />
         </span>
       </div>
       <div class="book-info">
@@ -80,6 +98,10 @@ const props = defineProps({
 .book-info {
   display: flex;
   font-size: 12px;
+}
+.open-review-window:hover {
+  color: #18a058;
+  cursor: pointer;
 }
 .gap {
   gap: 16px;
