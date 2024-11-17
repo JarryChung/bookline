@@ -8,6 +8,9 @@ const nav = useNavStore();
 const current = computed(() => {
   return contentMap[nav.activeTab as keyof typeof contentMap];
 });
+const transitionName = computed(() => {
+  return nav.direction === 'prev' ? 'prev' : 'next';
+});
 </script>
 
 <template>
@@ -18,9 +21,39 @@ const current = computed(() => {
       </NMessageProvider>
     </template>
     <template #content>
-      <component :is="current.component" />
+      <Transition :name="transitionName">
+        <KeepAlive>
+          <component :is="current.component" :key="nav.activeTab" />
+        </KeepAlive>
+      </Transition>
     </template>
   </Layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+.next-enter {
+  opacity: 0;
+  transform: translateX(30%);
+}
+.next-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+.next-leave-active {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateX(-30%);
+}
+
+.prev-enter {
+  opacity: 0;
+  transform: translateX(-30%);
+}
+.prev-enter-active {
+  transition: all 0.3s ease-in-out;
+}
+.prev-leave-active {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateX(30%);
+}
+</style>
