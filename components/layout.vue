@@ -59,6 +59,14 @@ const setActiveTab = (tabKey) => {
   border-radius: 8px;
   border: 1px solid #e9e9e9;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+.logo:hover {
+  border: 1px solid #18a058;
+  background-color: #18a058;
+}
+.logo:hover .icon {
+  transform: scale(1.2) translate3d(0, 3px, 0);
 }
 .tabs {
   width: 220px;
@@ -70,6 +78,7 @@ const setActiveTab = (tabKey) => {
 }
 .icon {
   height: 24px;
+  transition: all 0.3s ease-in-out;
 }
 .action {
   display: flex;
