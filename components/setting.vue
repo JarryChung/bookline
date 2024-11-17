@@ -18,35 +18,37 @@ const projects = [
 </script>
 
 <template>
-  <NDivider title-placement="left" class="divider">通用设置</NDivider>
-  <p>拼命开发中</p>
+  <div>
+    <NDivider title-placement="left" class="divider">通用设置</NDivider>
+    <p>拼命开发中</p>
 
-  <NDivider title-placement="left" class="divider">后续计划</NDivider>
-  <ul>
-    <li>支持导出为图片</li>
-    <li>支持支持导出至 Obsidian、Notion、Flomo、Logseq、Readwise、思源笔记等应用</li>
-  </ul>
+    <NDivider title-placement="left" class="divider">后续计划</NDivider>
+    <ul>
+      <li>支持导出为图片</li>
+      <li>支持支持导出至 Obsidian、Notion、Flomo、Logseq、Readwise、思源笔记等应用</li>
+    </ul>
 
-  <NDivider title-placement="left" class="divider">关于</NDivider>
-  <div class="about">
-    <p>
-      作者承诺 bookline
-      永久免费，未来所有新增功能均不收费，期望为每一位爱读书的朋友提供便捷的导出、回顾、统计、分享工具。
-    </p>
-    <p>想请作者喝一杯廉价咖啡? Thanks!!! 请使用 VX 扫码 👉</p>
-    <p>
-      via
-      <a href="https://github.com/JarryChung">Jarry Chung</a>
-    </p>
+    <NDivider title-placement="left" class="divider">关于</NDivider>
+    <div class="about">
+      <p>
+        作者承诺 bookline
+        永久免费，未来所有新增功能均不收费，期望为每一位爱读书的朋友提供便捷的导出、回顾、统计、分享工具。
+      </p>
+      <p>想请作者喝一杯廉价咖啡? Thanks!!! 请使用 VX 扫码 👉</p>
+      <p>
+        via
+        <a href="https://github.com/JarryChung">Jarry Chung</a>
+      </p>
 
-    <img src="./qrcode.svg" alt="qrcode" class="qrcode" />
-  </div>
+      <img src="./qrcode.svg" alt="qrcode" class="qrcode" />
+    </div>
 
-  <NDivider title-placement="left" class="divider">致谢</NDivider>
-  <div class="projects">
-    <a v-for="project in projects" :key="project.name" :href="project.url" target="_blank">
-      {{ project.name }}
-    </a>
+    <NDivider title-placement="left" class="divider">致谢</NDivider>
+    <div class="projects">
+      <a v-for="project in projects" :key="project.name" :href="project.url" target="_blank">
+        {{ project.name }}
+      </a>
+    </div>
   </div>
 </template>
 

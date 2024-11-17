@@ -33,13 +33,22 @@ export const contentMap = {
   stat: { component: Stat, action: StatAction },
   setting: { component: Setting, action: SettingAction },
 } as const;
+export const navIndexMap = navList.reduce((map, item, index) => {
+  map[item.key] = index;
+  return map;
+}, {} as Record<Tab, number>);
 
 export const useNavStore = defineStore('nav', () => {
   const activeTab = ref<Tab>('note');
+  const direction = ref<'prev' | 'next'>('prev');
 
   const setActiveTab = (tab: Tab) => {
+    const index = navIndexMap[tab];
+    const oldIndex = navIndexMap[activeTab.value];
+    direction.value = index > oldIndex ? 'next' : 'prev';
+
     activeTab.value = tab;
   };
 
-  return { activeTab, setActiveTab };
+  return { activeTab, direction, setActiveTab };
 });
