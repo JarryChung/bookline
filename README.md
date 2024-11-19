@@ -23,17 +23,15 @@ A browser extension that can be used to export WeRead notes and view reading rec
 
 ## 安装 / Installation
 
-- Chrome 插件 [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
-- Edge 插件 [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
-- Firefox 插件 [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
-- 手动安装 [release](https://github.com/JarryChung/bookline/releases)
+- Chrome 插件（亦可用于 Edge） [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/lhbcegihalknglaenpljmijecjbigkek)
+- Firefox 插件 [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/) ![Mozilla Add-on Users](https://img.shields.io/amo/users/bookline)
+- 手动安装 [release](https://github.com/JarryChung/bookline/releases) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JarryChung/bookline/total)
 
 ---
 
-- Chrome Extension [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
-- Edge Add-on [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek)
-- Firefox Add-on [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/)
-- Manual installation [release](https://github.com/JarryChung/bookline/releases)
+- Chrome Extension (Available for Edge) [bookline](https://chromewebstore.google.com/detail/bookline/lhbcegihalknglaenpljmijecjbigkek) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/lhbcegihalknglaenpljmijecjbigkek)
+- Firefox Add-on [bookline](https://addons.mozilla.org/en-US/firefox/addon/bookline/) ![Mozilla Add-on Users](https://img.shields.io/amo/users/bookline)
+- Manual installation [release](https://github.com/JarryChung/bookline/releases) ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JarryChung/bookline/total)
 
 ## 开发 / Development
 
