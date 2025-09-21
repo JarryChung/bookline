@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { useUserStore } from './user';
 import { useBookStore } from './book';
 import { createPool, formatTime, unique } from './helper';
 import { downloadZIP } from './export';
@@ -8,14 +7,13 @@ import { suffixMap, render } from './template';
 export const useNoteStore = defineStore('note', () => {
   const noteData = ref<Record<string, any>>({});
 
-  const user = useUserStore();
   const book = useBookStore();
   const selection = useSelectionStore();
 
   const fetchNote = createPool(
-    (bookId: string, vid: number): Promise<any> => {
-      const bookmarkListURL = `https://i.weread.qq.com/book/bookmarklist?bookId=${bookId}`;
-      const reviewListURL = `https://i.weread.qq.com/review/list?bookId=${bookId}&mine=1&listType=11&maxIdx=0&count=0&listMode=2&synckey=0&userVid=${vid}`;
+    (bookId: string): Promise<any> => {
+      const bookmarkListURL = `https://weread.qq.com/web/book/bookmarklist?bookId=${bookId}`;
+      const reviewListURL = `https://weread.qq.com/web/review/list?bookId=${bookId}&listType=4&maxIdx=0&count=3&listMode=2&synckey=0`;
       return Promise.all(
         [bookmarkListURL, reviewListURL].map((url) => fetch(url).then((res) => res.json())),
       ).then(([bookmarkList, reviewList]) => {
@@ -28,11 +26,10 @@ export const useNoteStore = defineStore('note', () => {
   );
 
   const batchFetchNote = (bookIds: string[]) => {
-    const vid = user.info.userVid;
     const promises = [];
     for (const bookId of bookIds) {
       if (!noteData.value[bookId]) {
-        const promise = fetchNote(bookId, vid).then((res) => {
+        const promise = fetchNote(bookId).then((res) => {
           noteData.value[bookId] = res;
         });
         promises.push(promise);

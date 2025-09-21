@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { useAsyncResource } from './helper';
 import { useBookStore } from './book';
 import { useNoteStore } from './note';
 
