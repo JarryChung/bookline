@@ -15,7 +15,8 @@ import ReviewAction from '../components/review-action.vue';
 import NoteAction from '@/components/note-action.vue';
 import HistoryAction from '@/components/history-action.vue';
 import StatAction from '@/components/stat-action.vue';
-import SettingAction from '@/components/setting-action.vue';
+// FIXME: 读不到用户信息，此模块暂时作废
+// import SettingAction from '@/components/setting-action.vue';
 
 type Tab = 'review' | 'note' | 'history' | 'stat' | 'setting';
 
@@ -31,7 +32,7 @@ export const contentMap = {
   review: { component: Review, action: ReviewAction },
   history: { component: History, action: HistoryAction },
   stat: { component: Stat, action: StatAction },
-  setting: { component: Setting, action: SettingAction },
+  setting: { component: Setting },
 } as const;
 export const navIndexMap = navList.reduce((map, item, index) => {
   map[item.key] = index;

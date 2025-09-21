@@ -1,25 +1,16 @@
 import { defineStore } from 'pinia';
 import { useAsyncResource, createPool, replaceOne } from './helper';
-import { useUserStore } from './user';
-
-export const useAllBookStore = defineStore('all_book', () => {
-  const user = useUserStore();
-  const url = `https://i.weread.qq.com/shelf/friendCommon?userVid=${user.info.userVid}`;
-  const allBookData = useAsyncResource(() => fetch(url).then((res) => res.json()));
-
-  return { allBookData };
-});
 
 const fetchProgress = createPool(
   (bookId: string): Promise<any> => {
-    const url = `https://i.weread.qq.com/book/getProgress?bookId=${bookId}`;
+    const url = `https://weread.qq.com/web/book/getProgress?bookId=${bookId}`;
     return fetch(url).then((res) => res.json());
   },
   { concurrency: 15 },
 );
 const fetchBook = (): Promise<any[]> => {
   return new Promise((resolve, reject) => {
-    fetch('https://i.weread.qq.com/user/notebooks')
+    fetch('https://weread.qq.com/api/user/notebook')
       .then((res) => res.json())
       .then(async (data) => {
         const books = data.books;
